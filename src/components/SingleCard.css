@@ -1,0 +1,64 @@
+.card {
+    position: relative;
+}
+
+.card img {
+    width: 100%;
+    display: block;
+    border: 2px solid #fff;
+    border-radius: 6px;
+}
+
+.left-card-deck {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+    /* width: 180px;
+    height: 250px; */
+    max-height: 100vh;
+    /* Adjust this value to fit within the viewport */
+    overflow-y: auto;
+    /* Allows scrolling if content overflows */
+}
+
+.right-card-deck {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+    /* width: 180px;
+    height: 250px; */
+    max-height: 100vh;
+    /* Adjust this value to fit within the viewport */
+    overflow-y: auto;
+    /* Allows scrolling if content overflows */
+}
+
+.played {
+    opacity: 0.5;
+    /* Adjust the opacity value as needed */
+}
+
+.number {
+    /* font-family: 'Raleway', sans-serif; */
+    size: 12px;
+}
+
+.red {
+    color: #cf51d8;
+}
+
+.blue {
+    color: #51b7cf;
+}
+
+.hidden {
+    display: none;
+}
