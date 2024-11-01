@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
 import SelectCardMenu from './SelectCardMenu';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import TextField from '@mui/material/TextField';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import Box from '@mui/material/Box';
+
+
 import './GameSettings.css';
 
 const GameSettings = ({ newTripleTriadGame }) => {
@@ -39,49 +49,69 @@ const GameSettings = ({ newTripleTriadGame }) => {
             setShowSelectCardMenu(true);
         } else {
             // Logic to create game
+            newTripleTriadGame();
         }
     };
+
+    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
 
     return (
         <div className="game-settings">
             <div className="settings-container">
                 <div className="select-rules">
-                    <h3>Select Rules</h3>
+                    <h3>1. Select Rules</h3>
                     <div className="rules-checkboxes">
                         {rules.map(rule => (
                             <div key={rule}>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        value={rule}
-                                        checked={selectedRules.includes(rule)}
-                                        onChange={() => handleRuleChange(rule)}
-                                    />
-                                    {rule}
-                                </label>
+                                <FormControlLabel
+                                    key={rule}
+                                    control={
+                                        <Checkbox
+                                            value={rule}
+                                            checked={selectedRules.includes(rule)}
+                                            onChange={() => handleRuleChange(rule)}
+                                        />
+                                    }
+                                    label={rule}
+                                />
                             </div>
                         ))}
                     </div>
                 </div>
 
                 <div className="select-opponent">
-                    <h3>Select Opponent</h3>
-                    <input
-                        type="text"
-                        placeholder="Search Opponent"
+                    <h3>2. Select Opponent</h3>
+                    <TextField
+                        label="Type to search opponents"
+                        variant="outlined"
                         value={searchTerm}
                         onChange={handleSearchChange}
+                        fullWidth
                     />
-                    <select value={selectedOpponent} onChange={handleOpponentChange}>
-                        {opponents.filter(opponent => opponent.includes(searchTerm)).map(opponent => (
-                            <option key={opponent} value={opponent}>
-                                {opponent}
-                            </option>
-                        ))}
-                    </select>
+                    <Box mt={2}>
+                        <FormControl variant="outlined" fullWidth>
+                            <InputLabel id="select-opponent-label">Selected Opponent</InputLabel>
+                            <Select
+                                labelId="select-opponent-label"
+                                value={selectedOpponent}
+                                onChange={handleOpponentChange}
+                                label="Selected Opponent"
+                            >
+                                {opponents.filter(opponent => opponent.includes(searchTerm)).map(opponent => (
+                                    <MenuItem key={opponent} value={opponent}>
+                                        {opponent}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </Box>
 
                     {selectedOpponent && (
-                        <button className='App-button' onClick={handleButtonClick}>{buttonText}</button>
+                        <div>
+                            <h3>3. Select Cards or Start Game</h3>
+                            <button className='App-button' onClick={handleButtonClick}>{buttonText}</button>
+                        </div>
                     )}
                 </div>
             </div>

@@ -1,6 +1,14 @@
 import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import './SelectCardMenu.css';
+// import './SelectCardMenu.css';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Table from '@mui/material/Table';
+import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import Button from '@mui/material/Button';
 
 
 
@@ -210,47 +218,91 @@ const SelectCardMenu = ({ newTripleTriadGame }) => {
     if (!isVisible) {
         return null; // Do not render the component if it's not visible
     }
-
+    const half = Math.ceil(stockCards.length / 2);
+    const firstHalf = stockCards.slice(0, half);
+    const secondHalf = stockCards.slice(half);
     return (
-        <div className="select-card-menu">
-            <div className="cards-container">
-                <div className="stock-cards">
-                    <h3>Stock Cards</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Card</th>
-                                <th>Quantity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {stockCards.map((card, index) => (
-                                <motion.tr
-                                    initial={{ x: '-20vw' }}
-                                    animate={{ x: -10 }}
-                                    key={index}
-                                    onMouseEnter={() => handleMouseEnter(card)}
-                                    onClick={(event) => handleCardClick(card, event)}
-                                    style={{ cursor: card.quantity === 0 ? 'not-allowed' : 'pointer', opacity: card.quantity === 0 ? 0.5 : 1 }}
-                                >
-                                    <td>{card.name}</td>
-                                    <td>{card.quantity}</td>
-                                </motion.tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+        <Box className="select-card-menu" p={2}>
+            <Box className="cards-container" display="flex" justifyContent="space-between">
+                <Box className="stock-cards" flex={3} mr={2}>
+                    <Typography variant="h5" style={{ marginBottom: '10px' }}>Stock Cards</Typography>
+                    <Box style={{ overflowY: 'auto', maxHeight: '75vh' }}>
+                        <Box display="flex">
+                            <Box flex={1} mr={2}>
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>Card</TableCell>
+                                            <TableCell>Quantity</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {firstHalf.map((card, index) => (
+                                            <motion.tr
+                                                initial={{ x: '-20vw' }}
+                                                animate={{ x: -10 }}
+                                                key={index}
+                                                onMouseEnter={() => handleMouseEnter(card)}
+                                                onClick={(event) => handleCardClick(card, event)}
+                                                style={{ cursor: card.quantity === 0 ? 'not-allowed' : 'pointer', opacity: card.quantity === 0 ? 0.5 : 1 }}
+                                            >
+                                                <TableCell>{card.name}</TableCell>
+                                                <TableCell>{card.quantity}</TableCell>
+                                            </motion.tr>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </Box>
+                            <Box flex={1} ml={2}>
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>Card</TableCell>
+                                            <TableCell>Quantity</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {secondHalf.map((card, index) => (
+                                            <motion.tr
+                                                initial={{ x: '-20vw' }}
+                                                animate={{ x: -10 }}
+                                                key={index}
+                                                onMouseEnter={() => handleMouseEnter(card)}
+                                                onClick={(event) => handleCardClick(card, event)}
+                                                style={{ cursor: card.quantity === 0 ? 'not-allowed' : 'pointer', opacity: card.quantity === 0 ? 0.5 : 1 }}
+                                            >
+                                                <TableCell>{card.name}</TableCell>
+                                                <TableCell>{card.quantity}</TableCell>
+                                            </motion.tr>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </Box>
+                        </Box>
+                    </Box>
+                </Box>
 
-                <div className="selected-cards">
-                    <h3>Selected Cards</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Card</th>
-                                <th>Quantity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <Box className="card-preview" flex={2} ml={2} style={{ position: 'sticky', top: 0 }}>
+                    <Typography variant="h5">Card Preview</Typography>
+                    {highlightedCard ? (
+                        <Box>
+                            <Typography>{highlightedCard.name}</Typography>
+                        </Box>
+                    ) : (
+                        <Typography>Click a card to select/deselect</Typography>
+                    )}
+                </Box>
+
+                <Box className="selected-cards" flex={2} ml={2} style={{ position: 'sticky', top: 0 }}>
+                    <Typography variant="h5">Selected Cards</Typography>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Card</TableCell>
+                                <TableCell>Quantity</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
                             {selectedCards.map((card, index) => (
                                 <motion.tr
                                     initial={{ x: '-20vw' }}
@@ -260,34 +312,25 @@ const SelectCardMenu = ({ newTripleTriadGame }) => {
                                     onClick={(event) => handleSelectedCardClick(card, event)}
                                     style={{ cursor: 'pointer' }}
                                 >
-                                    <td>{card.name}</td>
-                                    <td>{card.quantity}</td>
+                                    <TableCell>{card.name}</TableCell>
+                                    <TableCell>{card.quantity}</TableCell>
                                 </motion.tr>
                             ))}
-                        </tbody>
-                    </table>
-                    <button
+                        </TableBody>
+                    </Table>
+                    <Button
+                        className="App-button"
                         onClick={handleCreateGameClick}
                         disabled={totalSelectedQuantity !== 5}
-                        className='App-button'
+                        variant="contained"
+                        color="primary"
                         style={{ marginTop: '20px', padding: '10px', cursor: totalSelectedQuantity !== 5 ? 'not-allowed' : 'pointer' }}
                     >
                         Create Game
-                    </button>
-                </div>
-
-                <div className="card-preview">
-                    <h3>Card Preview</h3>
-                    {highlightedCard ? (
-                        <div>
-                            <p>{highlightedCard.name}</p>
-                        </div>
-                    ) : (
-                        <p>Click a card to select/deselect</p>
-                    )}
-                </div>
-            </div>
-        </div>
+                    </Button>
+                </Box>
+            </Box>
+        </Box>
     );
 }
 export default SelectCardMenu;

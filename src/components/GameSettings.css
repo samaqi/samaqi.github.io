@@ -13,6 +13,7 @@
 .select-rules,
 .select-opponent,
 .select-cards {
+    text-align: left;
     flex: 1;
     margin: 0 10px;
 }

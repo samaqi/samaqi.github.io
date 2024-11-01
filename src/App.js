@@ -4,6 +4,7 @@ import './App.css';
 import HomePage from './HomePage';
 import TripleTriadGame from './components/TripleTriadGame';
 import Header from './components/Header';
+import World from './components/World';
 
 function App() {
   // debugger
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/triple_triad" element={<TripleTriadGame />} />
+            <Route path="/world" element={<World />} />
           </Routes>
         </div>
       </Router>

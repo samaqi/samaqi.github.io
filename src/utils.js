@@ -1222,7 +1222,7 @@ class Rule {
             throw new TypeError("Cannot construct Rule instances directly");
         }
         this.priority = priority;
-        this.name = name;
+        this.ruleName = name;
         this.checkCombo = checkCombo;
     }
 
@@ -1306,7 +1306,7 @@ export class BasicRule extends Rule {
 
 export class ComboRule extends BasicRule {
     static priority = 2;
-    static name = "Combo";
+    static ruleName = "Combo";
     static checkCombo = true;
 
     canFlipSingle(flipper, opponentCard) {
@@ -1326,7 +1326,7 @@ export class ComboRule extends BasicRule {
 
 export class SameRule extends Rule {
     static priority = 4;
-    static name = "Same";
+    static ruleName = "Same";
     static checkCombo = true;
     wall = false;
 
@@ -1415,7 +1415,7 @@ export class SameRule extends Rule {
 
 export class PlusRule extends Rule {
     static priority = 3;
-    static name = "Plus";
+    static ruleName = "Plus";
     static checkCombo = true;
 
     canFlipSingle(flipper, opponentCard) {
