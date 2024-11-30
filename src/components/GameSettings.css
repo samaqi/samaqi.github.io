@@ -1,0 +1,19 @@
+.game-settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.settings-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.select-rules,
+.select-opponent,
+.select-cards {
+    text-align: left;
+    flex: 1;
+    margin: 0 10px;
+}

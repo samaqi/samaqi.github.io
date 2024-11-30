@@ -1,0 +1,107 @@
+.card {
+    position: relative;
+}
+
+.card img {
+    width: 100%;
+    display: block;
+    border: 2px solid #fff;
+    border-radius: 6px;
+}
+
+.left-card-deck {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+    /* width: 180px;
+    height: 250px; */
+    max-height: 100vh;
+    /* Adjust this value to fit within the viewport */
+    overflow-y: auto;
+    /* Allows scrolling if content overflows */
+}
+
+.right-card-deck {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+    /* width: 180px;
+    height: 250px; */
+    max-height: 100vh;
+    /* Adjust this value to fit within the viewport */
+    overflow-y: auto;
+    /* Allows scrolling if content overflows */
+}
+
+.played {
+    opacity: 0.5;
+    /* Adjust the opacity value as needed */
+}
+
+.hidden {
+    display: none;
+}
+
+.card-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.number {
+    position: absolute;
+    font-weight: bold;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+.number-up {
+    top: 8%;
+    left: 30%;
+    transform: translateX(-50%);
+}
+
+.number-left {
+    top: 35%;
+    left: 10%;
+    transform: translateY(-50%);
+}
+
+.number-right {
+    top: 35%;
+    right: 50%;
+    transform: translateY(-50%);
+}
+
+.number-down {
+    bottom: 38%;
+    left: 30%;
+    transform: translateX(-50%);
+}
+
+.animated-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    pointer-events: none;
+}
